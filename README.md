@@ -38,7 +38,7 @@ Install the dependencies and start the project
 ### Copyright
 © Cybergroup
 
-cygindiaexamportal.netlify.com
+http://cygindiaexamportal.netlify.com
 
 
 
