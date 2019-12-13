@@ -39,15 +39,16 @@ $(document).ready(function () {
     },
     success: function (recent) {
       display(recent);
-      // console.log(recent);
+      document.getElementById('main').style.display='block';
+      return
+     
     },
     error: function (error) {
       if (error.responseText == "unauthorized");
       {
         window.location.replace('../../un.html')
       }
-      console.log(error)
-      console.log("Something went wrong");
+     
     }
 
   });
@@ -60,7 +61,7 @@ $(document).ready(function () {
   }
   $(document).on('click', '.deleteButton', function () {
     let id = $(this).attr('id')
-    console.log(id);
+   
     $.ajax("https://node-examportal.herokuapp.com/examiner/"+id, {
       type: "DELETE",
       dataType: "json",
@@ -77,7 +78,7 @@ $(document).ready(function () {
         window.location.replace("../views/adminShowExaminer.html")
       },
       error: function () {
-        console.log("Something went wrong");
+        
       }
 
     })
@@ -93,11 +94,8 @@ $(document).ready(function () {
         "id": id
       },
       success: function (recent) {
-        console.log(recent);
-        //loadSetupExaminerPage(recent)
       },
       error: function () {
-        console.log("Something went wrong");
       }
 
     })

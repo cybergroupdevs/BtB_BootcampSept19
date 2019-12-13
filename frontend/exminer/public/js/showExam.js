@@ -28,10 +28,12 @@ function updateExam(examObjId) {
         },
         data: JSON.stringify(examDetail),
         success: function(data) {
+            alert('Updated')
             location.reload(true)
         },
         error: function(error) {
-            console.log(error)
+            alert('something went wrong')
+          
         }
     })
 }
@@ -45,15 +47,16 @@ function editExamDetail(id) {
         dataType: 'json',
         contentType: "application/json",
         headers: {
-            'token': localStorage.getItem('token'),
+            token: localStorage.getItem('token'),
             Authorization: "Bearer "+localStorage.getItem('token')
         },
         success: function(data) {
             let editForm = $("#edit-exam-detail").html()
-            $("#display-form").append(Mustache.render(editForm, data[0]))
+            $("#display-form").append(Mustache.render(editForm, data))
         },
         error: function(error) {
-            console.log(error)
+            alert('something went wrong')
+           
         }
     })
 }
@@ -76,12 +79,15 @@ function deleteExam(id) {
             location.reload(true)
         },
         error: function(error) {
-            console.log(error)
+            alert('something went wrong')
+           
         }
     })
 }
 
 $(document).ready(() => {
+    
+    
         $.ajax("https://node-examportal.herokuapp.com/exam", {
             type: 'GET',
             dataType: 'json',
@@ -92,13 +98,14 @@ $(document).ready(() => {
             },
             success: function(data) {
                 if (data.msg == 'No Exam') {
-                    alert("Exam Doesnot exist in your account")
+                    alert("Exam Does not exist in your account")
                     return
                 }
                 let parent = $(".exam-detail")
                     // load html template to display exam detail
                 $.each(data, (index, values) => {
                     let html = $('#display-exam-detail').html()
+                    values.examStartTime= moment(values.examStartTime).format('LLL');
                     values.index = index
                     parent.append(Mustache.render(html, values))
                 })
@@ -111,24 +118,24 @@ $(document).ready(() => {
             
             }
         })
-        $.ajax("https://node-examportal.herokuapp.com/exam", {
+       $.ajax("https://node-examportal.herokuapp.com/checkExaminer", {
             type: 'GET',
-            //contentType: "application/json",
             headers: {
                 token: localStorage.getItem('token'),
                 Authorization: "Bearer "+localStorage.getItem('token')
             },
             success: function(data) {
+                                document.getElementById('main').style.display='block';
                 return
             },
             error: function(error) {
                   if(error.responseText=="unauthorized")
                 {
-                    console.log(error.responseText)
-                   // window.location.replace('../../un.html')
+                
                 }
             
             }
 
         })
     })
+    

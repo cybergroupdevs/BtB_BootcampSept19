@@ -6,7 +6,8 @@ function loadQuestions(data, startTime, duration, examName) {
     $('#options').empty()
     const op = document.querySelector('#options')
     if (data[0].questionImage !== null) {
-        imageURL = data[0].questionImage.substring(2, data[0].questionImage.length)
+        // imageURL = data[0].questionImage.substring(2, data[0].questionImage.length)
+        imageURL = data[0].questionImage
         imageStatus = true
     } else imageStatus = false
 
@@ -78,10 +79,19 @@ function loadFullWindow() {
 
 function exitHandler() {
     if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
-        $('#modalEndTest').trigger("click")
+        let count = parseInt(localStorage.getItem('fullWindowExit'))
+        if(count != 3){
+            $('#fullScreenModal').modal('show')
+            count = count + 1
+            let remainingAttempt  = 3 - count
+            $('.change-error-message').text('Do not exit full window. Otherwise test will be submitted automatically. Remaining attempts '+remainingAttempt)
+            localStorage.setItem('fullWindowExit',count)
+        }
+        else{
+            $('#modalEndTest').trigger("click")
+        }  
     }
 }
-
 $(window).on('load', function() {
     $('#fullScreenModal').modal('show')
 })
@@ -96,7 +106,7 @@ $(document).ready(function() {
     document.addEventListener('webkitfullscreenchange', exitHandler);
     document.addEventListener('mozfullscreenchange', exitHandler);
     document.addEventListener('MSFullscreenChange', exitHandler);
-
+     localStorage.setItem('fullWindowExit',0)
     const tok = localStorage.getItem('token');
     if (tok == null) {
         location.replace("./examPortal.html")
@@ -126,12 +136,12 @@ $(document).ready(function() {
             
         },
         error: function(err) {
-            console.log(err)
+           
         }
     })
 })
 
-$(document).on('click', '#submitAnswer', function() {
+$(document).on('click', '#submitAnswer', async function() {
     let questionId = $(this).parent().parent().parent().parent().children().children().children().attr('id')
     let examCode = $(this).parent().parent().parent().parent().children().children().children().children().html()
     let value = []
@@ -148,8 +158,8 @@ $(document).on('click', '#submitAnswer', function() {
         checkedOption: value,
         qId: questionId
     }
-    console.log(dataToSend)
-    $.ajax("https://node-examportal.herokuapp.com/question", {
+    
+    await $.ajax("https://node-examportal.herokuapp.com/question", {
         type: 'POST',
         dataType: 'JSON',
         contentType: "application/json;charset=utf-8",
@@ -158,12 +168,12 @@ $(document).on('click', '#submitAnswer', function() {
             Authorization: "Bearer "+localStorage.getItem('token')
         },
         data: JSON.stringify(dataToSend),
-        success: function(data) {
-            $('#' + questionId + ".circle").css('background-color', "green")
-            $('#nextQuestion').trigger("click");
+        success: async function(data) {
+            await $('#' + questionId + ".circle").css('background-color', "green")
+            await $('#nextQuestion').trigger("click");
         },
         error: function(error) {
-            console.log(error)
+         
         }
     })
 })
@@ -194,7 +204,7 @@ $(document).on('click', '#nextQuestion', function() {
             }
         },
         error: function(err) {
-            console.log(err)
+           
         }
     })
 })
@@ -223,7 +233,7 @@ $(document).on('click', '#previousQuestion', function() {
             loadQuestions(data.questions, data.startTime, data.duration)
         },
         error: function(err) {
-            console.log(err)
+           
         }
     })
 })
@@ -247,7 +257,7 @@ $(document).on('click', '#modalEndTest', function() {
             $(location).attr('href', './endTest.html')
         },
         error: function(error) {
-            console.log(error)
+           
         }
     })
 })
@@ -294,7 +304,7 @@ $(document).on('click', '.circle', function() {
             loadQuestions(data.questions, data.startTime, data.duration)
         },
         error: function(error) {
-            console.log(error)
+          
         }
     })
 })

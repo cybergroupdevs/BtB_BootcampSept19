@@ -73,7 +73,7 @@ p{
 
    background-color: #212121;
 }
-.g1{
+.flex1{
    flex:40%;
    padding: 20px 20px;
    font-weight: 700;
@@ -82,7 +82,7 @@ p{
    color: rgb(255, 255, 255,0.9);
 }
 
-.v{
+.version{
    font-size: .875rem;
    margin-top: 20px;
    font-weight: 400;
@@ -109,14 +109,18 @@ p{
    
    color: rgba(255,255,255,0.4);
 }
-.g2{
+.flex2{
    flex: 27%;
    padding: 20px 20px;
 }
 span{
    display: block;
 }
-.v1{
+::placeholder{
+   font-size: 12px;
+   vertical-align: middle;
+}
+.version1{
   
    font-weight: 700;
    font-size: 1.25rem;
@@ -127,10 +131,10 @@ span{
    .footer{
       display: block;
    }
-   .g1{
+   .flex1{
       width: 100%;
    }
-   .g2{
+   .flex2{
       width: 100%;
    }
    .heading{

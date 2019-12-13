@@ -17,6 +17,7 @@
 </head>
 
 <body>
+    <div id="main">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black;">
         <img src="../../user/public/assets/cybergrouplogo.png" class="logo" style="width: 12% !important;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" data-target="#navbarSupportedContent">
@@ -33,7 +34,7 @@
                     <a class="nav-link" onclick="location.href='contactUs.html'">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" onclick="location.href='exam.html'">Test Collections</a>
+                    <a class="nav-link" onclick="location.href='exam.html'">Exam Collections</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -65,10 +66,10 @@
         <form role="form" class="form-test">
 
 
-            <div class="row setup-content" id="step-1">
+            <!-- <div class="row setup-content" id="step-1">
                 <div class="col-xs-6 col-md-offset-3">
                     <div class="col-md-12">
-                        <!-- <h3> Step 2</h3> -->
+                     
                         <div class="file-field">
                             <div class="btn btn-primary btn-sm float-left">
                                 <span>Choose file</span>
@@ -82,6 +83,42 @@
                         <button class="btn btn-primary nextBtn  pull-right" type="button" style="margin-top: 80px;">Next</button>
                     </div>
                 </div>
+            </div> -->
+            <div class="row setup-content" id="step-1">
+                <div class="col-xs-6 col-md-offset-3">
+                    <div class="col-md-12">         
+                        <div class="file-field">
+                            <input type="file" id="uploadExcelFile" name="uploadExcelFile" style="width: 50%;">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target=".bd-example-modal-lg">View Sample Excel Sheet</button>
+
+                            <div class="modal fade bd-example-modal-lg modalSize" tabindex="-1" role="dialog"
+                                aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img class="image-size" src="../public/assets/ExcelSample.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <input type="button" value="UploadExcelfile" name="submit" onclick="excelUpload(event)">
+                                    <span id = "status"></span> -->
+                            <!-- </form> -->
+                        </div>
+                        <button class="btn btn-primary nextBtn  pull-right" type="button"
+                            style="margin-top: 80px;">Next</button>
+                        <button class="btn btn-success pull-right" value="UploadExcelfile" type="button" name="submit"
+                            onclick="excelUpload(event)" style="margin-top: 80px;">UploadExcelFile
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="row setup-content" id="step-3">
                 <div class="col-xs-6 col-md-offset-3">
@@ -90,6 +127,10 @@
                         <div class="form-group">
                             <label class="control-label">Question</label>
                             <input maxlength="100" type="text" id="addtestQuestion" class="form-control" placeholder="Enter Question" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Image</label>
+                            <input type="file" name="filename" accept="image/gif, image/jpeg, image/png" id="myImage">
                         </div>
                         <div id="radiobtn">
                             <label><input type="radio" name="colorRadio" value="green" id="colorRadio1" > Single Option</label>
@@ -145,7 +186,10 @@
                             <input maxlength="100" type="text" id="addtestWeightage" class="form-control" placeholder="Enter Weightage" />
                         </div>
                         <button class="btn btn-success pull-right " type="button" id="submitBtn">Submit  Question</button>
-
+                        <button class="btn btn-success pull-right " type="button" class="btn btn-primary"
+                        data-toggle="modal" data-target="#exampleModal" onclick="submitAllBtn()">View All
+                        Question</button>
+                </div>
                     </div>
                 </div>
 
@@ -153,6 +197,7 @@
       </div>
     </div>
     </form>
+</div>
 </body>
-   <script src="/exminer/public/js/addQuestion.js"></script>
+   <script src="../../exminer/public/js/addQuestion.js"></script>
 </html>

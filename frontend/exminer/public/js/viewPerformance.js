@@ -83,7 +83,7 @@ function showStudents() {
             }
         },
         error: function(error) {
-            console.log(error)
+          
         }
     })
 }
@@ -98,12 +98,15 @@ function studentDetails(a) {
     $.ajax("https://node-examportal.herokuapp.com/examiner/exams/students", {
         type: 'GET',
         dataType: 'JSON',
+        beforeSend: function() {
+            $('.loading').fadeIn()
+        },
         headers: {
             'examId': a.id,
             'token': localStorage.getItem('token')
         },
         success: function(data) {
-            console.log(data)
+            $('.loading').fadeOut()
             $('#tcan').empty()
             let tr = document.createElement('tr')
             tr.innerHTML = "<th>" + " Student Email " + "</th>"+ "<th>" + " Student Name " + "</th>" + "<th>" + " Exam Code " + "</th>" + "<th>" + "Total Score" + "</th>" + "<th>" + "Maximum Marks" + "</th>" + "<th>" + "Percentage %" + "</th>";
@@ -112,7 +115,7 @@ function studentDetails(a) {
             while (i < data.b.length) {
 
                 let tr = document.createElement('tr')
-                tr.innerHTML = "<td>"+data.a[i].email+"</td>"+"<td>" + data.a[i].name + "</td>" + "<td>" + data.b[i].testCode + "</td>" + "<td>" + data.b[i].totalScore + "</td>" + "<td>" + data.c + "</td>" + "<td>" + (data.b[i].totalScore / data.c) * 100 + "%" + "</td>";
+                tr.innerHTML = "<td>"+data.a[i].email+"</td>"+"<td>" + data.a[i].name + "</td>" + "<td>" + data.b[i].testCode + "</td>" + "<td>" + data.b[i].totalScore + "</td>" + "<td>" + data.c + "</td>" + "<td>" + ((data.b[i].totalScore / data.c) * 100).toFixed(2) + "%" + "</td>";
                 $("#tcan").fadeIn()
                 $("#tcan").append(tr)
                 flag = 1;
@@ -126,7 +129,7 @@ function studentDetails(a) {
             $('#myChart').hide()
         },
         error: function(error) {
-            console.log('error')
+           
         }
     })
 }

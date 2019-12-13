@@ -26,7 +26,6 @@ a:hover {
 .container-1 button {
     display: block;
     margin: auto;
-    margin-top: 30px;
 }
 
 .container-1 {
@@ -53,6 +52,7 @@ button {
 body {
     background-color: #ebebeb;
     overflow-x: hidden;
+    overflow-y: hidden;
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
@@ -129,7 +129,10 @@ select {
  ::placeholder {
     font-weight: 100;
     color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    vertical-align: middle;
 }
+
 
 #span {
     font-weight: 200;
@@ -145,7 +148,9 @@ select {
 .btn {
     font-weight: 100;
 }
-
+.valid-feedback,.invalid-feedback{
+    margin-left: 14%;
+}
 .a {
     padding: 8px 30px;
     color: #000;
@@ -222,6 +227,7 @@ i {
 #main{
     display: none;
 }
+
 #loggedInEmail,#loggedInPassword{
     color: rgba(0, 0, 0, 0.5);
 }

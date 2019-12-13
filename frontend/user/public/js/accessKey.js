@@ -14,7 +14,7 @@ $(document).ready(function(){
         },
         success: function(data){
             localStorage.setItem('name',data.name)
-            document.getElementById('username').innerHTML = "Hie, "+data.name
+            document.getElementById('username').innsfszerHTML = "Welcome, "+data.name
         }
     })
 

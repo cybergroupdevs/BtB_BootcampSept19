@@ -14,19 +14,22 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: black;">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black;">
         <img src="../public/assets/cybergrouplogo.png" class="logo">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto ">
+            <!-- <ul class="navbar-nav mr-auto ">
 
                 <li class="nav-item">
                     <a class="nav-link" href="https://www.cygrp.com/">About</a>
                 </li>
-            </ul>
-        </div>
+            </ul> -->
+        
         <p style="color: white;margin-top: 15px; margin-right: 15px" id="username"></p>
         <button class="btn btn-outline-danger my-2 my-sm-0" type="button" onclick="logout()">Logout</button>
-
+    </div>
     </nav>
     <br><br>
     <div class="container flex">
@@ -44,7 +47,7 @@
                         <li>
                             You may work on the multiple-choice questions and the constructed-response assignment in any order that you choose. Be sure to allocate your time carefully so you are able to complete the entire test within the testing session. You may go back and review
                             your answers at any time during the testing session.</li>
-                        <li> You may NOT use a calculator or reference materials during the testing session. Select the Next button to continue.</li>
+                        <li> You may NOT use a calculator or reference materials during the testing session. Select the Start button to continue.</li>
                 </p>
                 </ul>
                 <p class="error-msg"></p>

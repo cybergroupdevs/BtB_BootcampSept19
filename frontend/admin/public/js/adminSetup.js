@@ -20,9 +20,6 @@ $.ajax("https://node-examportal.herokuapp.com/checkadmin", {
         }
     }
 })
-
-
-
 function showpasswordtext()
 {
   var x = document.getElementById("password");
@@ -36,65 +33,74 @@ function showpassword()
   
     x.type = "password";
 }
-
-function ValidateEmail(email)
-{
-    var mailformat =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-    
-   
-    if (mailformat.test(email) == false) 
-            {
-                return (false);
-            }
-            else
-            {
-                return (true);
-            }
-}
-function ValidatePhoneno(phoneno)
-{
-    var numbersformat = /^[0-9]+$/;
-    if (numbersformat.test(phoneno) == false) 
-            {
-                return (false);
-            }
-            else
-            {
-                return (true);
-            }
-}
-function ValidateName(name)
-{
-    var lettersformat = /^[a-zA-Z-,]+(\s{0,1}[a-zA-Z-, ])*$/
-    if (lettersformat.test(name) == false) 
-            {
-                return (false);
-            }
-            else
-            {
-                return (true);
-            }
-}
-function ValidatePassword(Password)
-{
-    //6 to 15 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character
-    var passwordformat=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,15}$/;
-    if (passwordformat.test(Password) == false) 
-            {
-               return (false);
-            }
-            else
-            {
-                return (true);
-            }
-}
 function logout() {
     localStorage.removeItem("token");
     localStorage.clear()
     window.location.replace("../../index.html");
 }
 $(document).ready(function() {
-    
+    // Email
+    $("#email").on("keyup", (event) => {
+        let regex1 = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/
+        if (regex1.test($("#email").val()) == true ) {
+
+            $('#view_Invalid1').hide()
+            $('#view_Valid1').show()
+        }
+        else {
+            $('#view_Valid1').hide()
+            $('#view_Invalid1').show()
+        }
+    })
+    // Name
+    $("#name").on("keyup", (event) => {
+        let regex1 = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+        if (regex1.test($("#name").val()) == true ) {
+
+            $('#view_Invalid2').hide()
+            $('#view_Valid2').show()
+        }
+        else {
+            $('#view_Valid2').hide()
+            $('#view_Invalid2').show()
+        }
+    }) 
+    //Password
+    $("#password").on("keyup", (event) => {
+        let regex1 = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,15}$/;
+        if (regex1.test($("#password").val()) == true) {
+            $('#view_Invalid3').hide()
+            $('#view_Valid3').show()
+        }
+        else {
+            $('#view_Valid3').hide()
+            $('#view_Invalid3').show()
+        }
+    })
+    //phone no
+    $("#phoneno").on("keyup", (event) => {
+        let regex1 = /^[0-9]\d{9}$/;
+        if (regex1.test($("#phoneno").val()) == true) {
+            $('#view_Invalid4').hide()
+            $('#view_Valid4').show()
+        }
+        else {
+            $('#view_Valid4').hide()
+            $('#view_Invalid4').show()
+        }
+    })
+    //collegename
+    $("#collegename").on("keyup", (event) => {
+        let regex1 = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+        if (regex1.test($("#collegename").val()) == true) {
+            $('#view_Invalid5').hide()
+            $('#view_Valid5').show()
+        }
+        else {
+            $('#view_Valid5').hide()
+            $('#view_Invalid5').show()
+        }
+    })
         $.ajax("https://node-examportal.herokuapp.com/loggedIn", {
             type: 'GET',
            // dataType: 'JSON',
@@ -104,12 +110,10 @@ $(document).ready(function() {
     
             },
             success: function (data) {
-                console.log(data)
                 document.getElementById('span').innerHTML = 'Welcome ' + data.name + '! &nbsp; &nbsp; '
                 localStorage.setItem("loggedInName", data.name)
             },
             error: function (error) {
-                console.log('not working')
             }
         })
     
@@ -123,27 +127,32 @@ $(document).ready(function() {
         var phoneno = document.getElementById("phoneno").value;
         var collegename = document.getElementById("collegename").value;
         var flag = 1;
-        if (email === ""||ValidateEmail(email)===false) {
-            flag = 0;
-            window.alert("Invalid Email Address");
-        } 
-       else if (name === ""||ValidateName(name)===false||name.toString().length>=20) {
-            flag = 0;
-            window.alert("Invalid Name");
-        } else if (password === ""||ValidatePassword(password)===false) {
-            flag = 0;
-            window.alert("Password contains 6-15 characters which contain atleast one Uppercase,lowercase,digit and special chararcter");
+        if ($("#email").val().length == 0) {
+            $('#view_Invalid1').show()
+            flag=0;
+            return
         }
-        else if (phoneno.toString().length != 10||ValidatePhoneno(phoneno)===false) {
-            flag = 0;
-            window.alert("Phone number must be valid");
-        } else if (collegename === ""||ValidateName(collegename)===false||collegename.toString().length>=20) {
-            flag = 0;
-            window.alert("Invalid College Name");
+         if ($("#name").val().length == 0) {
+            $('#view_Invalid2').show()
+            flag=0;
+            return
+        }
+         if ($("#password").val().length == 0) {
+            $('#view_Invalid3').show()
+            flag=0;
+            return
+        }
+         if ($("#phoneno").val().length == 0) {
+            $('#view_Invalid4').show()
+            flag=0;
+            return
+        }
+         if ($("#collegename").val().length == 0) {
+            $('#view_Invalid5').show()
+            flag=0;
+            return
         }
         if (flag == 1) {
-            debugger
-            //console.log("hello buddy");
 
             $.ajax("https://node-examportal.herokuapp.com/examiner", {
                 type: "POST",
@@ -165,8 +174,6 @@ $(document).ready(function() {
 
                 }),
                 success: function(recent) {
-                    console.log("..........");
-                    console.log(recent.message);
                     if (recent.message == "user already exist") {
                         window.alert("User Already Exist");
                     } else {
@@ -176,7 +183,6 @@ $(document).ready(function() {
 
                 },
                 error: function() {
-                    console.log("Something went wrong");
                 }
 
             });

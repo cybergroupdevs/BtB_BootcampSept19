@@ -4,10 +4,28 @@ body {
     background-color: #ebebeb;
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
 }
-
-li {
+.question-div ul li {
     margin-left: 20px;
     font-weight: 500;
+    list-style-type: upper-alpha;
+    font-size: 18px;
+}
+.more a {
+	color: #0254EB
+}
+.more a:visited {
+	color: #0254EB
+}
+.more a.morelink {
+	text-decoration:none;
+	outline: none;
+}
+.more .morecontent span {
+	display: none;
+}
+.list-type{
+    font-size: 20px;
+    font-weight: bolder;
 }
 img{
     height: 50%;
@@ -66,6 +84,9 @@ h5 {
     text-align: center;
     color: rgba(0, 0, 0, 0.5);
 }
+#main{
+    display: none;
+}
 
 .content {
     text-align: center;
@@ -111,7 +132,10 @@ a {
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.8);
 }
-
+::placeholder{
+    font-size: 12px;
+    vertical-align: middle;
+}
 .qustion-index{
     display: block;
     background-color: rgba(255, 255, 255, 0.9);
@@ -158,8 +182,11 @@ ul {
 
 .form1 {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 95px;
     /* padding: 20px; */
+}
+#addExamDate{
+    width: 100%;
 }
 
 .addExamDetail {
@@ -235,15 +262,15 @@ a:hover {
     margin: auto;
     /* margin-left: 90px; */
     width: 40%;
-    height: 680px;
+    /* height: 680px; */
     font-size: 1.5em;
-    padding-left: 10px;
-    padding-right: 10px;
     border-top-width: 0px;
     border-top-style: solid;
     border-top-color: orange;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
     background: white;
+    margin-bottom: 10px;
+    padding: 10px;
 }
 
 label {
@@ -310,7 +337,11 @@ option {
         position: fixed;
     }
     .question-div{
-        width: 70%
+        width: 70%;
+        margin-top: 40px;
+    }
+    .addExamDetail{
+        width: 100%;
     }
   }
 
@@ -331,7 +362,13 @@ option {
     .question-div{
         width: 70%
     }
-  }
+    .addExamDetail{
+        width: 100%;
+    }
+    .addQuestion{
+        width: 70%;
+    }
+ }
 .fixed{
     display: grid;
 }

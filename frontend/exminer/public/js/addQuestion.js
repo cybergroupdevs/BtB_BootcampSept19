@@ -1,8 +1,30 @@
 var tempExamCode = ''
 tempExamCode = localStorage.getItem('addQuestionid')
-console.log(tempExamCode)
+
 localStorage.removeItem('addQuestionid')
 $(document).ready(function() {
+    $.ajax("https://node-examportal.herokuapp.com/checkExaminer", {
+            type: 'GET',
+            //contentType: "application/json",
+            headers: {
+                token: localStorage.getItem('token'),
+                Authorization: "Bearer "+localStorage.getItem('token')
+            },
+            success: function(data) {
+                document.getElementById('main').style.display='block';
+                return
+            },
+            error: function(error) {
+                  if(error.responseText=="unauthorized")
+                {
+                   
+                    window.location.replace('../../un.html')
+                }
+            
+            }
+
+        })
+
 
     var navListItems = $('div.setup-panel div a'),
         allWells = $('.setup-content'),
@@ -96,7 +118,7 @@ $(document).ready(function() {
             option4 = $("#addtestOption4G").val();
             answerType = "singleOption"
             answer = $("input[type=radio][name=option1]:checked").val();
-            console.log('single op ',answer)
+            
             if (option1 === "" || option2 === "" || option3 === "" || option4 === "" || answer == ''||answer == undefined) {
                 alert("Please fill all options and select answer");
                 return
@@ -115,9 +137,7 @@ $(document).ready(function() {
         formData.append('option3', option3);
         formData.append('option4', option4);
         formData.append('weightage', weightage);
-        console.log(tempExamCode)
         formData.append('examCode', tempExamCode);
-        console.log(formData.values('examCode'))
         formData.append('answerType', answerType);
         formData.append('questionImage', $('input[type=file]')[0].files[0]);
         $.ajax("https://node-examportal.herokuapp.com/exam/question", {
@@ -154,16 +174,46 @@ $(document).ready(function() {
                     }
                 }
                 document.getElementById("addtestWeightage").value = '';
+                alert('Question Added')
             },
             error: function (error) {
-                console.log(error + " " + "error occurred");
             }
         });
     })
 });
+function excelUpload(event) {
+ 
+    event.preventDefault();
+    var formData = new FormData();
+    formData.append('examCode', tempExamCode)
+   
+    formData.append('excelFile', $('input[type=file]')[0].files[0])
+    $.ajax("https://node-examportal.herokuapp.com/exam/questions/uploadExcel", {
+        type: 'POST',
+        data: formData,
+        headers: {
+            token: localStorage.getItem('token'),
+            Authorization: "Bearer "+localStorage.getItem('token')
+        },
+        lowerCaseHeaders: true,
+        contentType:false,
+        processData: false,
+        success: function (data) {
+            alert("You have successfully uploaded the questions through excel file")
+            $(location).attr('href', './exam.html')
+            
+        },
+        error: function (error) {
+        }
+    })
+}
 
 function logout() {
     localStorage.clear()
     location.replace("../../index.html")
 
+}
+
+function submitAllBtn() {
+    location.replace("./questions.html")
 }

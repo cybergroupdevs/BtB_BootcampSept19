@@ -22,15 +22,6 @@ a:hover {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.modal-content {
-    background-color: white;
-    margin: 5% auto 15% auto;
-    border: none;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    width: 80%;
-    font-size: 20px;
-}
-
 .logo {
     height: 50px;
 }
@@ -49,8 +40,7 @@ a:hover {
 .flex {
     margin-top: 200px;
     display: flex;
-    /* margin: auto; */
-    width: 40%;
+    width: 50%;
     box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     background-color: white;
@@ -65,7 +55,7 @@ body {
 }
 
 .startTest {
-    margin-left: 40%;
+    margin-left: 50%;
 }
 
 .error-msg {
@@ -80,4 +70,25 @@ body {
 
 .btn {
     font-weight: 100;
+}
+
+@media(max-width:700px) {
+    .flex {
+        width: 80%;
+        margin-top: 150px;
+    }
+}
+
+@media(max-width:400px) {
+    .flex {
+        width: 90%;
+        margin-top: 150px;
+    }
+}
+
+@media(max-width:200px) {
+    .flex {
+        width: 100%;
+        margin-top: 150px;
+    }
 }

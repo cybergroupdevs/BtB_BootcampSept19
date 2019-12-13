@@ -14,8 +14,8 @@
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: black;">
+    <div id="main">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black;">
         <a href="https://www.cygrp.com/"><img src="../assets/cybergrouplogo.png" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
@@ -75,7 +75,7 @@
     <!--/Model-->
 
     <script id="index-template" type="text/html">
-        <table class="table table-light show-examiner-table container" style=" border: 1px solid black; border-top: 2px solid black; text-align: center;">
+        <table class="table table-bordered show-examiner-table tblcolr container" style=" text-align: center;">
             <thead>
                 <tr style="font-weight:100;">
                     <th scope="col">Email</th>
@@ -86,16 +86,17 @@
             </thead>
             {{ #data }}
             <tbody>
-                <tr>
-                    <td>{{ email }}</td>
-                    <td>{{ name }}</td>
-                    <td>{{ createdDate}}</td>
+                <tr class="middle">
+                    <td><b>{{ email }}</b></td>
+                    <td><b>{{ name }}</b></td>
+                    <td><b>{{ createdDate}}</b></td>
                     <td><button class="btn btn-outline-danger my-2 my-sm-0 " type="submit" id="{{ _id }}" data-toggle="modal" data-target="#exampleModal1" onclick="deleteexaminer(this.id)">Delete</button></td>
                 </tr>
                 {{ /data }}
             </tbody>
         </table>
     </script>
+    </div>
     <script src="../public/js/adminShowExaminer.js"></script>
 </body>
 

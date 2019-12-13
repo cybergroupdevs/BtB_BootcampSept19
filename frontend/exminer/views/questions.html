@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Show Test</title>
+    <title>Show Exam</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -13,9 +13,26 @@
     <script type="text/javascript" src="../public/js/examiner.js"></script>
     <link rel="icon" href="https://www.cygrp.com/wp-content/uploads/2019/06/cybergroup-site-icon.png" type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <script>
+    $('#addExamTestDate').datetimepicker({
+        uiLibrary: 'bootstrap4',
+        modal: true,
+        footer: true
+    });
+    </script>
 </head>
+<style>
+    #question-Index {
+  /* background-color: lightblue; */
+  height: 500px;
+  width: 200px;
+  overflow-y: scroll;
+}
+</style>
 
 <body>
+    <div id="main">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black;">
         <img src="../../user/public/assets/cybergrouplogo.png" class="logo"style="width: 100px !important;">
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" data-target="#navbarSupportedContent">
@@ -33,7 +50,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" onclick="location.href='exam.html'">Test Collections</a>
+                    <a class="nav-link" onclick="location.href='exam.html'">Exam Collections</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -43,38 +60,41 @@
         </div>
     </nav>
     <!-- append view question template -->
-    <div class="container question-div-pos" id="mainDiv">
-        <div class="row qrow">
-            <div class="col-md-10" id="question-Display"></div>
-            <div class="col-md-2" id="question-Index"></div>
+    
+        <div class="container question-div-pos" id="mainDiv">
+            <div class="row">
+               <div class="col-xs-6 col-md-4" id="question-Index"></div>
+               <div class="col-xs-12 col-sm-6 col-md-8" id="question-Display"></div>
+            </div>
         </div>
-    </div>
+         
+    
     <!-- append edit question template -->
     <div class="container-fluid" id="display-edit-form"></div>
     <!-- display question template -->
     <script id="index-template" type="text/html">
-        <span class="qustion-index"><a href="#{{_id}}" >{{index}}</a></span>
+        <span class="qustion-index"><a href="#{{_id}}" >Question-{{index}}</a></span>
     </script>
     <script id="question-template-body" type="text/html">
-        <div class="row">
+        <div class="row fixed">
             <div class="col-md-12 question-div" id="{{_id}}">
                 <h3>Question-{{index}}</h3>
                 <p>{{questionText}}</p>
                 {{#status}}
-                <img src="{{questionImage}}" /> {{/status}}
+                <img src="{{questionImage}}" />
+                {{/status}}
                 <ul>
-                    <li>{{option1}}</li>
-                    <li>{{option2}}</li>
-                    <li>{{option3}}</li>
-                    <li>{{option4}}</li>
+                    {{#opt1}}<li class="more" id ="option1{{index}}">{{option1}}</li>{{/opt1}}
+                    {{#opt2}}<li class="more" id="option2{{index}}">{{option2}}</li>{{/opt2}}
+                    {{#opt3}}<li class="more" id="option3{{index}}">{{option3}}</li>{{/opt3}}
+                    {{#opt4}}<li class="more" id ="option4{{index}}">{{option4}}</li>{{/opt4}}
                 </ul>
-                <h6>Answer : {{answer}} </h6>
                 <div class="btn1">
                     <button type="button" class="btn btn-outline-info" id="editQs{{index}}" onclick="editQuestion(this.id)">Edit</button>
                     <button type="button" id="delQues{{index}}" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal1" onclick="setQsId(this.id)">Delete</button>
-                    <!-- <button type="button" class="btn btn-outline-danger" id="delQues{{index}}" onclick="removeQuestion(this.id)">Delete</button> -->
                 </div>
             </div>
+        </div>
     </script>
     <!-- edit question template for multiple option -->
     <script id="edit-question-template" type="text/html">
@@ -167,13 +187,12 @@
         <div class="modal-dialog " role="document">
             <div class="modal-content confirm-box">
                 <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
                 </div>
                 <div class="modal-body" id="modalBody">
-                    <h4>You want delete this question?</4>
+                    <h4>You want to delete this Question?</4>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-info" data-dismiss="modal">No</button>
@@ -181,6 +200,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 

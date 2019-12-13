@@ -1,16 +1,22 @@
 var tempExamCode = ''
 
+
 $(document).ready(function () {
-   
+    document.getElementById('exam').style.fontWeight='700';
+    document.getElementById('exam').style.color='#007bff';
+
+    document.getElementById('disable').style.display='none'
+    document.getElementById('disabled2').style.display='none'
+    document.getElementById('disabled3').style.display='none'
     document.getElementById('span').innerHTML = "Welcome " + localStorage.getItem('loggedInName') + "! &nbsp;&nbsp;"
     var navListItems = $('div.setup-panel div a'),
         allWells = $('.setup-content'),
         allNextBtn = $('.nextBtn');
-
     allWells.hide();
 
     navListItems.click(function (e) {
         e.preventDefault();
+    
         var $target = $($(this).attr('href')),
             $item = $(this);
 
@@ -21,14 +27,21 @@ $(document).ready(function () {
             $target.show();
             $target.find('input:eq(0)').focus();
         }
-    });
 
+    });
+    
     allNextBtn.click(function () {
+        document.getElementById('addQuestion').style.fontWeight='700';
+    document.getElementById('addQuestion').style.color='#007bff';
+    document.getElementById('upload').style.fontWeight='400';
+    document.getElementById('upload').style.color='black';
+
         var curStep = $(this).closest(".setup-content"),
             curStepBtn = curStep.attr("id"),
             nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
             curInputs = curStep.find("input[type='text'],input[type='url']"),
             isValid = true;
+        // document.getElementById('disabled3').href='#step-3'
 
         $(".form-group").removeClass("has-error");
         for (var i = 0; i < curInputs.length; i++) {
@@ -51,84 +64,140 @@ $(document).ready(function () {
     });
 });
 
+
 $(document).ready(function () {
-    $.ajax('https://node-examportal.herokuapp.com/exam/questions/uploadExcel', {
-        type: 'GET',
-        headers: {
-            token: localStorage.getItem('token'),
-            Authorization: "Bearer "+localStorage.getItem('token')
-        },
-        success: function (data) {
-            document.getElementById('main').style.display='block';
-        },
-        error: function (error) {
-            if(error.responseText=="unauthorized")
-            {
-                window.location.replace('../../un.html')
+    $('#btnSave').attr('disabled', true)
+    $('.form-test input').keyup(function () {
+        $("#addExamName").on("keyup", (event) => {
+            let regex1 = /^([a-zA-Z\s]){3,30}$/;
+            if (regex1.test($("#addExamName").val()) == true) {
+                $('#view_Invalid1').hide()
+                $('#view_Valid1').show()
+
             }
-            console.log(error + " " + error)
+            else {
+                $('#btnSave').attr('disabled',true)
+                $('#view_Valid1').hide()
+                $('#view_Invalid1').show()
+            }
+        })
+
+        $("#addExamCode").on("keyup", (event) => {
+            let regex1 = /^([a-zA-Z0-9 _-]){3,8}$/;        ;
+            if (regex1.test($("#addExamCode").val()) == true) {
+                $('#view_Invalid2').hide()
+                $('#view_Valid2').show()
+            }
+            else {
+                $('#btnSave').attr('disabled',true)
+                $('#view_Valid2').hide()
+                $('#view_Invalid2').show()
+            }
+        })
+        $("#addExamDuration").on("keyup", (event) => {
+            // let regex1 = /^([0-9]\s){1,4}$/;
+            let regex1= /^([0-9\s]){0,4}$/
+            if (regex1.test($("#addExamDuration").val()) == true) {
+                $('#view_Invalid3').hide()
+                $('#view_Valid3').show()
+            }
+            else {
+                $('#btnSave').attr('disabled',true)
+                $('#view_Valid3').hide()
+                $('#view_Invalid3').show()
+            }
+        })
+        
+        let isTrue = true
+        if($('#addExamName').val() === ''){
+            isTrue = false
         }
+        else if($('#addExamCode').val() === ''){
+            isTrue = false
+        }
+        else if($('#addExamDuration').val() === ''){
+            isTrue = false
+        }
+        if(isTrue  == true){
+            $('#btnSave').removeAttr('disabled')
+        }
+        else{
+            $('#btnSave').attr('disabled',true)
+        }
+
     })
-    //     $('.loader').hide()
+
     document.getElementById('btnSave').addEventListener('click', validateForm)
     function validateForm() {
         var testName = document.getElementById("addExamName").value;
         var testCode = document.getElementById("addExamCode").value;
         var testDuration = document.getElementById("addExamDuration").value;
         var testDate = document.getElementById("addExamTestDate").value;
-        if (testName === '' || testCode == '' || testDuration == '' || testDate == '') {
-            alert("Please fill all the fields")
-            return
-        }
-        const testD = testDate.slice(0, 10);
-        const testd = testDate.slice(11, 16)
-        testDate = testD.concat(" " + testd + ":00")
-        tempExamCode = testCode
-        let examDetail = {
-            examName: testName,
-            examCode: tempExamCode,
-            examDuration: testDuration,
-            examStartTime: testDate
-        }
-        $.ajax("https://node-examportal.herokuapp.com/exam", {
-            type: "POST",
-            dataType: "json",
-            headers: {
-                token: localStorage.getItem('token'),
-                Authorization: "Bearer "+localStorage.getItem('token')
-            },
-            contentType: "application/json;charset=utf-8",
-            data: JSON.stringify(examDetail),
-            contentType: "application/json; charset=utf-8",
-            success: function (recent) {
-                if (recent.message == "Exam Code already exist") {
-                    window.alert("Exam Code Already Exist");
-                    //location.replace("./views/examdetails.html")
-                } else {
+        localStorage.setItem('examName',testName);
+        localStorage.setItem('examCode',testCode);
+        var flag = 0;
+        
+        
+        if (flag == 0) {
+            const testD = testDate.slice(0, 10);
+            const testd = testDate.slice(11, 16)
+            testDate = testD.concat(" " + testd + ":00")
+            tempExamCode = testCode
+            let examDetail = {
+                examName: testName,
+                examCode: tempExamCode,
+                examDuration: testDuration,
+                examStartTime: testDate
+            }
+            $.ajax("https://node-examportal.herokuapp.com/exam", {
+                type: "POST",
+                dataType: "json",
+                headers: {
+                    token: localStorage.getItem('token'),
+                    Authorization: "Bearer " + localStorage.getItem('token')
+                },
+                contentType: "application/json;charset=utf-8",
+                data: JSON.stringify(examDetail),
+                contentType: "application/json; charset=utf-8",
+                success: function (recent) {
                     document.getElementById("addExamName").value = '';
                     document.getElementById("addExamCode").value = '';
                     document.getElementById("addExamDuration").value = '';
                     document.getElementById("addExamTestDate").value = '';
+                    document.getElementById('step-1').style.display = 'none';
+                    document.getElementById('step-2').style.display = 'block';
+                    document.getElementById('step-3').style.display = 'none';
+                    document.getElementById('exam').style.fontWeight='400';
+                    document.getElementById('exam').style.color='black';
+                    document.getElementById('upload').style.fontWeight='700';
+                    document.getElementById('upload').style.color='#007bff';
+                    document.getElementById('exam-card').style.display='block';
+                    document.getElementById('sampleExamName').innerHTML=localStorage.getItem('examName');
+                    document.getElementById('sampleExamCode').innerHTML=localStorage.getItem('examCode');
+
+
+
+                    // down.innerHTML = "Link disabled";
+                },
+                error: function (error){
+                    alert("Exam Code Already Exist");
                 }
-            },
-            error: function (error) {
-                
-                console.log("error : " + error)
-            }
-        })
+            })
+        }
     }
 })
 
 $(document).ready(function () {
-    document.getElementById('submitBtn').addEventListener('click', validateForm)
+    document.getElementById('submitBtn').addEventListener('click', (event) => {
 
-    function validateForm() {
-        // console.log("hello")
         var question = document.getElementById("addtestQuestion").value;
         var weightage = document.getElementById("addtestWeightage").value;
-        if (question === "") {
-            alert("Please enter question");
-            return
+        // if (question === "") {
+        //     alert("Please enter question");
+        //     return
+        // }
+        if ($("#addExamName").val().length == 0) {
+            $('#view_Invalid5').show()
         }
         var option = $("input[type=radio][name=colorRadio]:checked").val();
         if (option == undefined || option === '') {
@@ -154,10 +223,10 @@ $(document).ready(function () {
                 }
             })
             answer = answer.trim()
-            if (option1 === "" || option2 === "" || option3 === "" || option4 === "" || answer == ''|| answer===undefined) {
-                alert("Please fill all options and tick answers");
-                return
-            }
+            // if (option1 === "" || option2 === "" || option3 === "" || option4 === "" || answer == ''|| answer===undefined) {
+            //     alert("Please fill all options and tick answers");
+            //     return
+            // }
 
         } else if (option == "green") {
             option1 = $("#addtestOption1G").val();
@@ -166,14 +235,21 @@ $(document).ready(function () {
             option4 = $("#addtestOption4G").val();
             answerType = "singleOption"
             answer = $("input[type=radio][name=option1]:checked").val();
-            if (option1 === "" || option2 === "" || option3 === "" || option4 === "" || answer == ''||answer == undefined) {
-                alert("Please fill all options and select answer");
+            // if (option1 === "" || option2 === "" || option3 === "" || option4 === "" || answer == ''||answer == undefined) {
+            //     alert("Please fill all options and select answer");
+            //     return
+            // }
+            if (answer == undefined) {
+                alert("Please select answer");
                 return
             }
         }
         if (weightage === "") {
             alert("Please enter weightage");
             return
+        }
+        if ($("#addtestWeightage").val().length == 0) {
+            $('#view_Invalid6').show()
         }
         var formData = new FormData();
 
@@ -187,17 +263,18 @@ $(document).ready(function () {
         formData.append('examCode', tempExamCode);
         formData.append('answerType', answerType);
         formData.append('questionImage', $('input[type=file]')[1].files[0]);
+        // debugger
         $.ajax("https://node-examportal.herokuapp.com/exam/question", {
             type: "POST",
             data: formData,
-            dataType: "json",
+            dataType: "JSON",
             headers: {
                 token: localStorage.getItem('token'),
-                Authorization: "Bearer "+localStorage.getItem('token')
+                Authorization: "Bearer " + localStorage.getItem('token')
             },
             contentType: false,
             processData: false,
-            success: function (data, status) {
+            success: function (data) {
                 document.getElementById("addtestQuestion").value = '';
                 // ("#addtestAnswer").value = '';
                 if (answerType == "multipleOption") {
@@ -205,6 +282,7 @@ $(document).ready(function () {
                     document.getElementById("addtestOption2").value = '';
                     document.getElementById("addtestOption3").value = '';
                     document.getElementById("addtestOption4").value = '';
+                    document.getElementById("myImage").value = ''
                     let checkBox = $('input[type=checkbox][name=option]')
                     $.each(checkBox, (i, chk) => {
                         if ($(chk).val()) {
@@ -216,51 +294,52 @@ $(document).ready(function () {
                     document.getElementById("addtestOption2G").value = '';
                     document.getElementById("addtestOption3G").value = '';
                     document.getElementById("addtestOption4G").value = '';
+                    document.getElementById("myImage").value = '';
                     if ($('input[type=radio][name=option1]:checked').val()) {
                         $('input[type=radio][name=option1]').prop('checked', false)
                     }
                 }
                 document.getElementById("addtestWeightage").value = '';
+                alert("Question Added")
             },
             error: function (error) {
-                console.log(error + " " + "error occurred");
             }
         });
+    })
 
-    }
+    // function validateForm(event) { }
 })
 
 //this uploads excel file
 function excelUpload(event) {
- 
+
     event.preventDefault();
     var formData = new FormData();
     formData.append('examCode', tempExamCode)
+
     formData.append('excelFile', $('input[type=file]')[0].files[0])
-    console.log(formData.get('excelFile'));
-    $.ajax('https://node-examportal.herokuapp.com/exam/questions/uploadExcel', {
+    $.ajax("https://node-examportal.herokuapp.com/exam/questions/uploadExcel", {
         type: 'POST',
         data: formData,
         headers: {
             token: localStorage.getItem('token'),
-            Authorization: "Bearer "+localStorage.getItem('token')
+            Authorization: "Bearer " + localStorage.getItem('token')
         },
         lowerCaseHeaders: true,
-        contentType:false,
+        contentType: false,
         processData: false,
         success: function (data) {
             alert("You have successfully uploaded the questions through excel file")
             $(location).attr('href', './exam.html')
-            
+
         },
         error: function (error) {
-            console.log(error + " " + error)
         }
     })
 }
 
 function submitAllBtn() {
-
-    location.replace("./exam.html")
+    localStorage.setItem('examCode',tempExamCode)
+    location.replace("./questions.html")
 
 }

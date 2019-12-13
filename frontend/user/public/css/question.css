@@ -6,11 +6,18 @@ body {
     margin-right: 10px;
 }
 
+.change-error-message{
+    color: red;
+    font-weight: bold;
+}
 .modal-title {
     font-weight: 100;
     font-size: 20px;
 }
-
+::placeholder{
+    font-size: 12px;
+    vertical-align: middle;
+}
 .full-button {
     font-weight: 100;
 }

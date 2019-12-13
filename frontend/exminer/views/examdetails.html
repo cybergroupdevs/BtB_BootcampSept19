@@ -4,22 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/bs-stepper/dist/css/bs-stepper.min.css">
     <link rel="icon" href="https://www.cygrp.com/wp-content/uploads/2019/06/cybergroup-site-icon.png"
         type="image/x-icon">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../public/css/examDetails.css">
    
 </head>
 
 <body>
-    <div  id="main">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black;">
-        <img src="../../user/public/assets/cybergrouplogo.png" class="logo" style="width: 12% !important;">
+        <img src="../../user/public/assets/cybergrouplogo.png" class="logo">
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" data-target="#navbarSupportedContent">
-                              <span class="navbar-toggler-icon"></span>
-                            </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto ">
@@ -31,7 +30,7 @@
                     <a class="nav-link" onclick="location.href='contactUs.html'">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" onclick="location.href='exam.html'">Test Collections</a>
+                    <a class="nav-link" onclick="location.href='exam.html'">Exam Collections</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -47,94 +46,113 @@
         <div class="stepwizard col-md-offset-3 col-md-offset-6 col-md-offset-8">
             <div class="stepwizard-row setup-panel">
                 <div class="stepwizard-step">
-                    <a href="#step-1" class="btn btn-primary btn-circle">1</a>
-                    <p>Exam Details</p>
+                    <a href="#step-1" class="btn btn-primary btn-circle" id="disable" disabled="disabled">1</a>
+                    <p id="exam">Exam Details</p>
+                </div>  
+                <div class="stepwizard-step">
+                    <a href="#step-2" class="btn btn-default btn-circle" disabled="disabled" id="disabled2">2</a>
+                    <p id="upload">Upload from excel file</p>
                 </div>
                 <div class="stepwizard-step">
-                    <a href="#step-2" class="btn btn-default btn-circle" disabled="disabled">2</a>
-                    <p>Upload from excel file</p>
-                </div>
-                <div class="stepwizard-step">
-                    <a href="#step-3" class="btn btn-default btn-circle" disabled="disabled">3</a>
-                    <p>Add Questions Manually</p>
+                    <a href="#step-3" class="btn btn-default btn-circle" disabled="disabled" id="disabled3">3</a>
+                    <p id="addQuestion">Add Questions Manually</p>
                 </div>
             </div>
         </div>
         <form role="form" class="form-test">
             <div class="row setup-content" id="step-1">
+                   
                 <div class="col-xs-6 col-md-offset-3 form-test1">
                     <div class="col-md-12 ">
                         <!-- <h3> Step 1</h3> -->
                         <div class="form-group">
                             <label class="control-label">Exam Name</label>
-                            <input maxlength="100" type="text" class="form-control" placeholder="Enter Exam Name"
+                            <input maxlength="100" type="text" class="form-control" placeholder="eg Mechanical2019"
                                 id="addExamName" />
+                                <div class="valid-feedback" id="view_Valid1" style="display: none;" >
+                                    Looks good!
+                            </div>
+                            <div class = "invalid-feedback" id="view_Invalid1" style="display: none;">
+                                Please Enter a valid exam name
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Exam Code</label>
-                            <input maxlength="100" type="text" class="form-control" placeholder="Enter Exam Code"
+                            <input maxlength="100" type="text" class="form-control" placeholder="Min length-3 and Max length-8"
                                 id="addExamCode" />
+                                <div class="valid-feedback" id="view_Valid2" style="display: none;" >
+                                    Looks good!
+                            </div>
+                            <div class = "invalid-feedback" id="view_Invalid2" style="display: none;">
+                                Please Enter a valid exam code
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Exam Duration</label>
-                            <input maxlength="100" type="text" class="form-control" placeholder="Enter Exam Duration(in minutes)"
+                            <input maxlength="100" type="text" class="form-control" placeholder="Min time-10 and Max time -1000 (minutes)"
                                 id="addExamDuration" />
+                                <div class="valid-feedback" id="view_Valid3" style="display: none;" >
+                                    Looks good!
+                            </div>
+                            <div class = "invalid-feedback" id="view_Invalid3" style="display: none;">
+                                Please Enter valid exam duration
+                            </div>
                         </div>
                         
                         <div class="input-appenddate">
                             
                             <div class="form-group">
                                     <label class="control-label">Exam Date</label>
-                                <input id="addExamTestDate" data-format="yyyy-mm-dd HH:MM" placeholder="MM/dd/yyyy HH:mm"/>
+                                <input id="addExamTestDate" data-format="yyyy-mm-dd HH:MM" placeholder="yyyy-mm-dd hh:mm"/>
                             </div>
+                            <div class="valid-feedback" id="view_Valid4" style="display: none;" >
+                                Looks good!
+                        </div>
+                        <div class = "invalid-feedback" id="view_Invalid4" style="display: none;">
+                            Please Enter exam date
+                        </div>
                            
                           </div>
-                        <button class="btn btn-primary nextBtn pull-right" type="button" id="btnSave">Next</button>
+                          <button class="btn btn-success align" type="button" id="btnSave" >Submit</button>
+                         <!-- <button class="btn btn-primary nextBtn pull-right" value="" type="button" id="btnSave">Next</button>  -->
                     </div>
                 </div>
             </div>
             <div class="row setup-content" id="step-2">
-                <div class="col-xs-6 col-md-offset-3">
-                    <div class="col-md-12">
-                        <!-- <h3> Step 2</h3> -->
-                        <div class="file-field">
-                            <!-- <div class="btn btn-primary btn-sm float-left">
-                                <span>Choose file</span>
-                                <input type="file">
-                            </div> -->
-                            <!-- <form> -->
-                            <input type="file" id="uploadExcelFile" name="uploadExcelFile" style="width: 50%;">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target=".bd-example-modal-lg">View Sample Excel Sheet</button>
+                <div class="col-md-12 position" style="height: 250px;">
+                                <input type="file" id="uploadExcelFile" name="uploadExcelFile" style="width: 97%; ">
+                        
+                        <button type="button" class="btn btn-primary position1" data-toggle="modal"
+                            data-target=".bd-example-modal-lg">View Sample Excel Sheet </button>
 
-                            <div class="modal fade bd-example-modal-lg modalSize" tabindex="-1" role="dialog"
-                                aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <img class="image-size" src="../public/assets/ExcelSample.png">
-                                        </div>
+                        <div class="modal fade bd-example-modal-lg modalSize" tabindex="-1" role="dialog"
+                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img class="image-size" src="../public/assets/ExcelSample.png">
                                     </div>
                                 </div>
                             </div>
-                            <!-- <input type="button" value="UploadExcelfile" name="submit" onclick="excelUpload(event)">
-                                    <span id = "status"></span> -->
-                            <!-- </form> -->
                         </div>
-                        <button class="btn btn-primary nextBtn  pull-right" type="button"
-                            style="margin-top: 80px;">Next</button>
-                        <button class="btn btn-success pull-right" value="UploadExcelfile" type="button" name="submit"
-                            onclick="excelUpload(event)" style="margin-top: 80px;">UploadExcelFile
+                    <button class="btn btn-primary position2">
+                        <a href="../public/assets/sample.xlsx" download>Download Excel Sheet!</a> 
+                    </button>
+                    <div class="positionDiv">
+                        <button class="btn btn-primary nextBtn position3" type="button">Next</button>
+                        <button class="btn btn-success position4" value="UploadExcelfile" type="button" name="submit"
+                            onclick="excelUpload(event)" >UploadExcelFile
                         </button>
                     </div>
                 </div>
-            </div>
+        </div>
+            
             <div class="row setup-content" id="step-3">
                 <div class="col-xs-6 col-md-offset-3">
                     <div class="col-md-12" id="question">
@@ -143,6 +161,12 @@
                             <label class="control-label">Question</label>
                             <input maxlength="100" type="text" id="addtestQuestion" class="form-control"
                                 placeholder="Enter Question" />
+                                <div class="valid-feedback5" id="view_Valid1" style="display: none;" >
+                                    Looks good!
+                            </div>
+                            <div class = "invalid-feedback5" id="view_Invalid1" style="display: none;">
+                                Please Enter Question
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -223,6 +247,12 @@
                             <label class="control-label">Weightage</label>
                             <input maxlength="100" type="text" id="addtestWeightage" class="form-control"
                                 placeholder="Enter Weightage" />
+                                <div class="valid-feedback6" id="view_Valid1" style="display: none;" >
+                                    Looks good!
+                            </div>
+                            <div class = "invalid-feedback6" id="view_Invalid1" style="display: none;">
+                                Please Enter Weightage
+                            </div>
                         </div>
                         <button class="btn btn-success pull-right " type="button" id="submitBtn">Submit
                             Question</button>
@@ -259,11 +289,16 @@
             </div>
         </div>
     </div>
-</div>
+    <div class="exam-card" id="exam-card">
+        <div class="exam-card-body">
+            <h6>Exam Name : &nbsp;&nbsp;<span id="sampleExamName"></span> </h6>
+            <h6>Exam Code : &nbsp;&nbsp;<span id="sampleExamCode"></span> </h6>
+        </div>
+    </div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/bs-stepper/dist/js/bs-stepper.min.js"></script>
 <script src="../public/js/examiner.js"></script>
 <script type="text/javascript" src="../public/js/examDetails.js"></script>

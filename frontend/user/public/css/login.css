@@ -1,3 +1,12 @@
+.field-icon {
+    float: right;
+     margin-right:20px;
+    margin-top: -28px;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.6);
+  }
 li {
     margin-left: 50px;
     font-weight: 500;
@@ -87,13 +96,16 @@ label {
 .cg{
     animation: rotate 1.2s infinite;
 }
+::placeholder{
+    font-size: 12px;
+    vertical-align: middle;
+}
 @keyframes rotate{
 
  0%   {transform: rotateY(0deg);}
  50%{transform: rotateY(180deg);}
  100%{transform: rotateY(360deg);}
 }
-
 #alert-box{
     display: none;
 }
@@ -138,3 +150,4 @@ label {
         width: 100%;
     }
 }
+

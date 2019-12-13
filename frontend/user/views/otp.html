@@ -39,13 +39,27 @@
         <br>
         <br>
         <div class="container-fluid" style="margin-top: 50px;">
+            <div class="row" style="display: none;">
+                <div class="col-xs-6 col-sm-4"></div>
+                <div class="col-xs-6 col-sm-4">
+                    <div class="input-group">
+                        <input type="text" class="output" placeholder="">
+                        <!-- <span class="input-group-btn">
+                          <button class="btn btn-success" id="verify" type="button">Verify</button>
+                        </span> -->
+                    </div>
+                </div>
+                
+                <div class="clearfix visible-xs-block"></div>
+                <div class="col-xs-6 col-sm-4"></div>
+            </div>
             <div class="row">
                 <div class="col-xs-6 col-sm-4"></div>
                 <div class="col-xs-6 col-sm-4">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Enter OTP">
+                        <input type="text" class="form-control" placeholder="Enter OTP from email">
                         <span class="input-group-btn">
-                          <button class="btn btn-success" type="button">Verify</button>
+                          <button class="btn btn-success" id="verify" type="button">Verify</button>
                         </span>
                       </div>
                 </div>
@@ -62,7 +76,7 @@
                 <div class="cube2"></div>
             </div>
         </div>
-        <script src="../public/js/login.js"></script>
+        <script src="../public/js/otp.js"></script>
 </body>
 
 </html>

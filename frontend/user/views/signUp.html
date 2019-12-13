@@ -5,16 +5,13 @@
     <title>Cyber Group - Sign Up</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
     <link rel="stylesheet" type="text/css" href="../public/css/signUp.css">
-
     <!-- cybergroup logo on top -->
     <link rel="icon" href="https://www.cygrp.com/wp-content/uploads/2019/06/cybergroup-site-icon.png"
         type="image/x-icon">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../public/css/loader.css">
-
 </head>
 
 <body>
@@ -38,7 +35,7 @@
         <div class="container flex" style="margin-top: 50px;">
             <div class="flex-1">
                 <!-- was-validated modal-content -->
-               <h1> <span class="badge badge-light">Please Sign Up</span></h1>
+               <h1> <span>Please Sign Up</span></h1>
                 
                 <p>Please fill in this form to create an account.</p>
                 <hr>
@@ -88,14 +85,18 @@
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="inputPassword" class="form-control hover" placeholder="Password"
-                        required>
+                        required >
+                        <span toggle="#inputPassword" class="fa fa-fw fa-eye field-icon toggle-password" onmousedown="showpasswordtext()" onmouseup="showpassword()"></span>               
+
+                        
                     <div class="valid-feedback" id="view_Valid5" style="display: none;">
                         Looks good!
                     </div>
                     <div class="invalid-feedback" id="view_Invalid5" style="display: none;">
                         Please Enter a minimum 6 digits password
                     </div>
-                </div>
+                </div> 
+                
                 <div class="form-group">
                     <label for="password">Confirm Password</label>
                     <input type="password" id="cnfPassword" class="form-control" placeholder="Confirm Password"

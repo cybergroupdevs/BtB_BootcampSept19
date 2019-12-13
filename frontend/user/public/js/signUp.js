@@ -26,7 +26,7 @@ $(document).ready(function () {
         
     })
     $("#inputEmail").on("keyup", (event) => {
-        // console.log(event.target.value);
+      
         let regex1 = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
 
         if (regex1.test($("#inputEmail").val()) == true) {
@@ -39,7 +39,7 @@ $(document).ready(function () {
         }
     })
     $("#phoneNumber").on("keyup", (event) => {
-        // console.log(event.target.value);
+        
         let regex1 = /^[5-9]\d{9}$/;
 
         if (regex1.test($("#phoneNumber").val()) == true) {
@@ -52,7 +52,7 @@ $(document).ready(function () {
         }
     })
     $("#inputPassword").on("keyup", (event) => {
-        // console.log(event.target.value);
+       
         let regex1 = /(?=.{6,})/;
 
         if (regex1.test($("#inputPassword").val()) == true) {
@@ -65,7 +65,7 @@ $(document).ready(function () {
         }
     })
     $("#cnfPassword").on("keyup", (event) => {
-        // console.log(event.target.value);
+       
         let regex1 = $("#inputPassword").val();
         var result = (event.target.value == regex1);
 
@@ -78,6 +78,7 @@ $(document).ready(function () {
             $('#view_Invalid6').show()
         }
     })
+    
 
     $("#signUpSubmit").click(function validate() {
         var firstName = $("#firstName").val()
@@ -143,9 +144,19 @@ $(document).ready(function () {
                 "password": Password,
                 "accountType": accountType
             }),
-            success: function (data, status) {
+            success: function (data) {
+                if(data.status=="200"){
+                    alert("Your SignUp has been successful")
+                    $(location).attr('href', '../views/login.html')
+                }else {
+                    if(data.status=="400"){
+                        window.alert("Please enter a valid email address")
+                    }
+                }
                 alert("Your SignUp has been successful")
-                $(location).attr('href', '../views/login.html')
+                    $(location).attr('href', '../views/login.html')
+                
+                
             },
             error: function (error) {
                 $('.spinner').hide()
@@ -155,3 +166,16 @@ $(document).ready(function () {
         })
     })
 })
+function showpasswordtext()
+{
+  var x =  document.getElementById("inputPassword");
+ 
+    x.type = "text";
+}
+
+function showpassword()
+{
+  var x = document.getElementById("inputPassword")
+  
+    x.type = "password";
+}

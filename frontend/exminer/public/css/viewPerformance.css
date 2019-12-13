@@ -13,7 +13,13 @@ li {
     transition-duration: 0.8s;
     color: white;
 } */
-
+.loading{
+    margin-top: 40px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 28px;
+    display: none;
+}
 .main {
     margin-top: 7%;
 }
@@ -119,6 +125,13 @@ table {
  width: 500px;
  height: 500px;
  margin: 0 auto;
+ }
+ ::placeholder{
+    font-size: 12px;
+    vertical-align: middle;
+}
+ #main{
+     display: none;
  }
  @media (max-width: 760px) {
      .performance-text{

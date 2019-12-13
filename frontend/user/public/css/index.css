@@ -13,6 +13,10 @@ li:hover {
 a:hover {
     color: rgba(255, 255, 255, 0.8);
 }
+::placeholder{
+    font-size: 12px;
+    vertical-align: middle;
+}
 
 .nav-link {
     color: rgba(255, 255, 255, 0.8);
@@ -73,4 +77,17 @@ a:hover {
 
 .cd-intro {
     color: rgba(255, 255, 255, 1)
+}
+
+
+@media only screen and (max-width: 768px) {
+    .container{
+        width: 400px;
+    }
+    .btn{
+        margin-left: 25%;
+        font-size: 20px;
+    }
+
+
 }

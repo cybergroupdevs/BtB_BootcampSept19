@@ -1,4 +1,28 @@
 $(document).ready(function () {
+    $("#loggedInName").on("keyup", (event) => {
+        let regex1 = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/
+        if (regex1.test($("#loggedInName").val()) == true ) {
+    
+            $('#view_Invalid1').hide()
+            $('#view_Valid1').show()
+        }
+        else {
+            $('#view_Valid1').hide()
+            $('#view_Invalid1').show()
+        }
+    })
+    $("#loggedInPhone").on("keyup", (event) => {
+        let regex1 = /^[5-9]\d{9}$/;
+
+        if (regex1.test($("#loggedInPhone").val()) == true) {
+            $('#view_Invalid4').hide()
+            $('#view_Valid4').show()
+        }
+        else {
+            $('#view_Valid4').hide()
+            $('#view_Invalid4').show()
+        }
+    })
     const tok = localStorage.getItem('token');
     if (tok == null) {
         location.replace("../../index.html")
@@ -11,8 +35,7 @@ $(document).ready(function () {
 
         },
         success: function (data) {
-            console.log(data)
-            document.getElementById('main').style.display='block';
+                       document.getElementById('main').style.display='block';
             
 
         },
@@ -21,11 +44,11 @@ $(document).ready(function () {
             {
                 window.location.replace('../../un.html')
             }
-            console.log('not working')
         }
     })
 
 })
+
 
 function showEdit() {
     $("#showEditDiv").fadeIn("slow");
@@ -43,7 +66,6 @@ function showEdit() {
 
         },
         error: function (error) {
-            console.log('not working')
         }
     })
 }
@@ -58,12 +80,10 @@ function showName() {
 
         },
         success: function (data) {
-            console.log(data)
-            document.getElementById('span').innerHTML = 'Welcome ' + data.name + '! &nbsp; &nbsp; '
+           document.getElementById('span').innerHTML = 'Welcome ' + data.name + '! &nbsp; &nbsp; '
             localStorage.setItem("loggedInName", data.name)
         },
         error: function (error) {
-            console.log('not working')
         }
     })
 
@@ -82,7 +102,6 @@ function editDetails() {
     var name = document.getElementById('loggedInName').value
     var phone = document.getElementById('loggedInPhone').value
     var college = document.getElementById('loggedInCollege').value
-    var pass = document.getElementById('loggedInPassword').value
 
     $.ajax("https://node-examportal.herokuapp.com/examiner", {
         type: 'PATCH',
@@ -98,7 +117,6 @@ function editDetails() {
             "name": name,
             "phoneNumber": phone,
             "collegeName": college,
-            "password": pass
         }),
 
         success: function (data) {
@@ -109,7 +127,6 @@ function editDetails() {
 
         },
         error: function (error) {
-            // console.log('not updated')
             window.alert('Not Updated')
         }
     })

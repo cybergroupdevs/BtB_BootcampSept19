@@ -19,32 +19,33 @@
     </head>
 
     <body onload="showStudents(),showName()">
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black;">
-            <img src="../../user/public/assets/cybergrouplogo.png" class="logo" style="width: 12% !important;">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" data-target="#navbarSupportedContent">
-                              <span class="navbar-toggler-icon"></span>
-                            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto ">
-
-                    <li class="nav-item">
-                        <a class="nav-link" onclick="location.href='examiner.html'">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" onclick="location.href='contactUs.html'">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" onclick="location.href='exam.html'">Test Collections</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <span id="span">Welcome &nbsp; </span>
-
-                    <button class="btn btn-outline-danger my-2 my-sm-0" type="button" onclick="logout()">Logout</button>
-                </form>
-            </div>
-        </nav>
+        <div id="main">
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black;">
+                <img src="../../user/public/assets/cybergrouplogo.png" class="logo">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" data-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto ">
+        
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="location.href='examiner.html'">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="location.href='contactUs.html'">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="location.href='exam.html'">Exam Collections</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <span id="span">Welcome &nbsp; </span>
+        
+                        <button class="btn btn-outline-danger my-2 my-sm-0" type="button" onclick="logout()">Logout</button>
+                    </form>
+                </div>
+            </nav>
         <div class="main">
             <h2 class="container display-4 performance-text">Performance of Students : </h2>
             <table class="container table table-light table-striped performance-table" id="tbdy">
@@ -58,6 +59,9 @@
             </table>
             <!-- <center> -->
             <!-- </center> -->
+        </div>
+        <div class="loading" id="loading">
+            <span>LOADING . . . </span>
         </div>
         <div>
             <table class="container table performance-table-1 student-detail-table" id="tcan">
@@ -74,6 +78,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <script src="../public/js/viewPerformance.js"></script>
     </body>

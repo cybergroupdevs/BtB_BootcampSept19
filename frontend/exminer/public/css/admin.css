@@ -20,6 +20,10 @@ li {
         width:50%;
         
     }
+    ::placeholder{
+        font-size: 12px;
+        vertical-align: middle;
+    }
     #marginfromtop
     {
        width:40%;

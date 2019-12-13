@@ -3,8 +3,6 @@ $(document).ready(function(){
         e.preventDefault();
         var em=document.getElementById("email").value;
         var pwd=document.getElementById("password").value;
-        console.log(em);
-        console.log(pwd);
         $.ajax("https://node-examportal.herokuapp.com/adminlogin",{
         type:"POST",
         dataType:"json",
@@ -17,7 +15,6 @@ $(document).ready(function(){
                 }
             ),
             success:function(recent){ 
-                //console.log(recent.message);
                 if(recent.message=="Email or password is not valid")
                 {
                 window.alert(recent.message);

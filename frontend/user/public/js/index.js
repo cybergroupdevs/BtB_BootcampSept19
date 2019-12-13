@@ -7,7 +7,7 @@ $(document).ready(function(){
             "token":localStorage.getItem('token')
         },
         success: function(data){
-            console.log(data);
+           
             if (data == "Examiner")
                     $(location).attr('href', '../../exminer/views/examiner.html')
                 else if (data == "Student")

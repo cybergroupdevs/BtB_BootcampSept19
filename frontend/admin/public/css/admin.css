@@ -11,7 +11,15 @@ li {
     margin-left: 50px;
     font-weight: 500;
 }
-
+.tblcolr{
+    background-color: white;
+}
+.middle{
+    vertical-align: middle;
+}
+.table-bordered td, .table-bordered th{
+    vertical-align: middle;
+}
 li:hover {
     background-color: #c4e3f3;
     border-radius: 6px;
@@ -64,7 +72,6 @@ a:hover {
     background-color: white;
     margin: 5% auto 15% auto;
     border: none;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     width: 80%;
     font-size: 20px;
 }
@@ -151,7 +158,7 @@ tbody td {
     vertical-align: middle;
 }
 p{
-    color: rgba(255, 255, 255, 0.9);
+   
     vertical-align: middle;
     margin-top: 10px;
 }
@@ -227,6 +234,13 @@ i {
 }
 #main{
     display: none;
+}
+.color{
+    color: rgba(255, 255, 255, 0.9);
+}
+::placeholder{
+    font-size: 12px;
+    vertical-align: middle;
 }
 
 @media (max-width: 765px) {

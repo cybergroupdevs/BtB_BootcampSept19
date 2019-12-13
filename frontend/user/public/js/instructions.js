@@ -10,10 +10,14 @@ $(document).on('click', '.startTest', function() {
         data: {
             examCode: localStorage.getItem("examCode")
         },
-        success: function() {
+        success: function(data) {
+            if(data.submitStatus){
+                $('.error-msg').text("You have already submitted the test")
+            }
+            else{
                 $(location).attr('href', './question.html')
-            },
-        error: function(error) { console.log(error)}
+            }},
+        error: function(error) { }
     })
 
 })
@@ -75,7 +79,7 @@ $(document).ready(function() {
         success: function(data) {
             var minToMilliSec = data.examData.examDuration * 60000;
             checkTimeForTest(data.examData.examStartTime,minToMilliSec)
-            document.getElementById('username').innerHTML = "Hie "+localStorage.getItem('name')
+            document.getElementById('username').innerHTML = "Welcome "+localStorage.getItem('name')
         },
         error: function(error) {
             if(error.status === 401){
